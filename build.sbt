@@ -5,7 +5,7 @@ val macwire = "com.softwaremill.macwire" %% "macros" % "2.2.5" % "provided"
 val scalaTest = "org.scalatest" %% "scalatest" % "3.0.1" % Test
 
 
-lazy val `helloscala` = (project in file("."))
+lazy val `grpc-sbt-experiments` = (project in file("."))
   .settings(
     organization in ThisBuild := "com.example",
     version in ThisBuild := "1.0-SNAPSHOT",
@@ -52,6 +52,6 @@ lazy val grpcCommon = Seq(
   libraryDependencies ++= Seq(
     "com.trueaccord.scalapb" %% "scalapb-runtime" % Versions.scalapbVersion,
     "com.trueaccord.scalapb" %% "scalapb-runtime-grpc" % Versions.scalapbVersion,
-    "io.grpc" % "grpc-netty" % "1.2.0"
+    "io.grpc" % "grpc-netty" % "1.4.0"
   )
 )
