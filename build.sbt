@@ -42,7 +42,6 @@ lazy val `hellojava-lagom-client` = (project in file("hellojava-lagom-client"))
   .settings(
     libraryDependencies ++= Seq(
       lagomJavadslClient,
-      "com.trueaccord.scalapb" %% "scalapb-runtime" % "0.6.0",
       "com.lightbend.lagom" %% "lagom-javadsl-integration-client" % "1.4.0-SNAPSHOT",
       lagomJavadslApi,
       lagomLogback
@@ -63,11 +62,9 @@ def scalapbSettings(projectFolder: String, forJava: Boolean = false, forServer: 
   if (forJava) {
     Seq(
       PB.targets in Compile := {
-        Seq(scalapb.gen(
-          javaConversions = true,
-          grpc = forServer
-        ) -> (sourceManaged in Compile).value,
-          PB.gens.java -> (sourceManaged in Compile).value)
+        Seq(
+          scalapb.gen(javaConversions = true, grpc = forServer) -> (sourceManaged in Compile).value,
+          PB.gens.java("3.3.1") -> (sourceManaged in Compile).value)
       },
       protoSources
     )
@@ -75,10 +72,9 @@ def scalapbSettings(projectFolder: String, forJava: Boolean = false, forServer: 
 
     Seq(
       PB.targets in Compile := {
-        Seq(scalapb.gen(
-          javaConversions = false,
-          grpc = forServer
-        ) -> (sourceManaged in Compile).value)
+        Seq(
+          scalapb.gen(javaConversions = false, grpc = forServer) -> (sourceManaged in Compile).value
+        )
       },
       protoSources
     )
